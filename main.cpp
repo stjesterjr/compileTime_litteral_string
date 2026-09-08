@@ -39,6 +39,14 @@ constexpr auto operator+(const S<A>& lhs, const S<B>& rhs){
     return S<Res>(lhs.data, rhs.data, std::make_index_sequence<A-1>{}, std::make_index_sequence<B>{});
 }
 
+template<S str>
+constexpr auto operator""_ct()
+{
+    return str;
+}
+
+constexpr auto s0 = "ooo"_ct;
+
 constexpr auto s1 = S("abc");
 using s1_t = decltype(s1.data);
 constexpr auto s2 = S("def");
@@ -46,7 +54,7 @@ using s2_t = decltype(s2.data);
 constexpr auto s3 = s1 + s2;
 using s3_t = decltype(s3.data);
 
-constexpr auto AB = "A" + "B";
+constexpr auto AB = "A"_ct + "B"_ct;
 
 void use_string(const char* txt){
     std::cout << txt;
